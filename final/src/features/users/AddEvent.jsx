@@ -1,5 +1,4 @@
 import { useDispatch, useSelector } from "react-redux";
-
 import { useHistory } from "react-router-dom";
 import { useState } from "react";
 import { userAdded } from "./EventSlice";
@@ -43,7 +42,7 @@ export function AddEvent() {
         <label htmlFor="titleInput">Title</label>
           <input
             type="text"
-            placeholder="Title"
+            placeholder="Title of event"
             id="title"
             onChange={handleTitle}
             value={title}
@@ -51,7 +50,7 @@ export function AddEvent() {
           <label htmlFor="bodyInput">Description</label>
           <input
             type="text"
-            placeholder="details of events"
+            placeholder="Details of event"
             id="bodyInput"
             onChange={handleBody}
             value={body}

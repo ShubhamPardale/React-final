@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 
 export const fetchUsers = createAsyncThunk("users/fetchUsers", async () => {
-  const response = await fetch("http://localhost:8000/blogs");
+  const response = await fetch("http://localhost:8000/posts");
   const events = await response.json();
   return events;
 });
@@ -27,9 +27,9 @@ const usersSlice = createSlice({
     },
     userDeleted(state, action) {
       const { id } = action.payload;
-      const existingUser = state.entities.find((user) => user.id === id);
+      const existingUser = state.entities.find((event) => event.id === id);
       if (existingUser) {
-        state.entities = state.entities.filter((user) => user.id !== id);
+        state.entities = state.entities.filter((event) => event.id !== id);
       }
     },
   },

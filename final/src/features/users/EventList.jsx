@@ -1,6 +1,5 @@
 import { userDeleted } from "./EventSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
 import download from "./download.jpg";
 import './Event.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
