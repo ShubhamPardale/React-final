@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { useHistory } from "react-router-dom";
 import { useState } from "react";
-import { userAdded } from "./usersSlice";
+import { userAdded } from "./EventSlice";
 
 export function AddEvent() {
   const dispatch = useDispatch();
@@ -15,13 +15,13 @@ export function AddEvent() {
   const handleTitle = (e) => setTitle(e.target.value);
   const handleBody = (e) => setBody(e.target.value);
 
-  const usersAmount = useSelector((state) => state.users.entities.length);
+  const eventsAmount = useSelector((state) => state.events.entities.length);
 
   const handleClick = () => {
     if (title && body) {
       dispatch(
         userAdded({
-          id: usersAmount + 1,
+          id: eventsAmount + 1,
           title,
           body,
         })
@@ -40,7 +40,7 @@ export function AddEvent() {
   return (
     <div className="create">
        <h1>Add Event</h1>
-        <label htmlFor="nameInput">Title</label>
+        <label htmlFor="titleInput">Title</label>
           <input
             type="text"
             placeholder="Title"
@@ -48,17 +48,17 @@ export function AddEvent() {
             onChange={handleTitle}
             value={title}
           />
-          <label htmlFor="emailInput">Email</label>
+          <label htmlFor="bodyInput">Description</label>
           <input
-            type="email"
+            type="text"
             placeholder="details of events"
-            id="emailInput"
+            id="bodyInput"
             onChange={handleBody}
             value={body}
           />
           {error && error}
           <button onClick={handleClick} className="button-primary">
-            Add user
+            Add Event
           </button>
     </div>
   );

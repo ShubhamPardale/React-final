@@ -1,30 +1,19 @@
-import { fetchUsers, userDeleted } from "./usersSlice";
+import { userDeleted } from "./EventSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import download from "./download.jpg";
-import './user.css'
-import { useHistory,useLocation } from "react-router-dom";
+import './Event.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 export function EventList() {
   const dispatch = useDispatch();
-  const history = useHistory();
-  const { pathname } = useLocation();
-  const userId = parseInt(pathname.replace("/edit-user/", ""));
-  
-  const { entities } = useSelector((state) => state.users);
+  const { entities } = useSelector((state) => state.events);
   const loading = useSelector((state) => state.loading);
-  const user = useSelector((state) =>
-  state.users.entities.find((user) => user.id === userId)
-  );
-
-  const handleClick = () => {
-    console.log(user.id)
-      dispatch(
-        userDeleted({
-          id: userId,
-        })
-      );
-    
+  const HandleDelete = (id) => {
+    dispatch(userDeleted({ id }));
   };
+  
 
   return (
     <div className="container">
@@ -36,18 +25,16 @@ export function EventList() {
             <div>
               {entities.length &&
                 entities.map(({ id, title, body }, i) => (
-                  <div className='All-Posts'>
-            
-          <div class="card">
-          <img src={download} class="card-img-top" alt="..." style={{width:"100%",height:"4cm"}}/>
-          <div class="card-body" >
-            <h5 class="card-title" >{title}</h5>
-            <p class="card-text" >{body}</p>
-            <button className="delete-btn"  onClick={handleClick}>Delete</button>
-          </div>
-        </div>
-        
-        </div> 
+                  <div className='All-Posts'key={id}>
+                   <div class="card" >
+                    <img src={download} class="card-img-top" alt="..." style={{width:"100%",height:"4cm"}}/>
+                    <div class="card-body" >
+                      <h5 class="card-title" >{title}</h5>
+                      <p class="card-text" >{body}</p>
+                    </div>
+                    <button  className="delete-btn" onClick={() => HandleDelete(id)}>Delete</button>
+                   </div>
+                  </div> 
                 ))}
             </div>
           </div>
